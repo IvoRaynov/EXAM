@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head">head</head>
+
+<body>
+
+<div th:replace="fragments/navbar">Navbar</div>
+
+<div class="container">
+    <h2 class="text-center text-white" th:text="#{auth_login_login}"></h2>
+    <form
+            th:action="@{/users/login}"
+            th:method="post"
+            th:object="${userModel}"
+            class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
+        <div class="form-group">
+            <label for="username" class="text-white font-weight-bold" th:text="#{auth_login_email}"></label>
+            <input
+                    id="username"
+                    th:value="${username}"
+                    name="username"
+                    type="text"
+                    min="2"
+                    max="50"
+                    class="form-control"
+                    th:placeholder="#{auth_login_email}"/>
+        </div>
+        <div class="form-group">
+            <label for="password" class="text-white font-weight-bold" th:text="#{auth_login_password}"></label>
+            <input
+                    id="password"
+                    name="password"
+                    type="password"
+                    min="2"
+                    max="20"
+                    class="form-control"
+                    th:placeholder="#{auth_login_password}"/>
+
+        </div>
+
+        <p th:if="${bad_credentials}" class="errors alert alert-danger">
+           <a th:text="#{auth_login_err_message}"> Invalid username or password.</a>
+        </p>
+        <div class="row">
+            <div class="col col-md-4">
+                <div class="button-holder d-flex">
+                    <input type="submit" class="btn btn-info btn-lg" th:value="#{navbar_login}"/>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div>
+    <footer th:replace="fragments/footer::footer"></footer>
+</div>
+</body>
+</html>

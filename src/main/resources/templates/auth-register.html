@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/head">head</head>
+
+<body>
+
+<div th:replace="fragments/navbar">Navbar</div>
+
+<div class="container">
+    <h2 class="text-center text-white" th:text="#{auth_register_register_user}">Register User</h2>
+    <form th:action="@{/users/register}"
+          th:method="post"
+          th:object="${userModel}"
+          class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
+        <div class="row">
+            <div class="form-group col-md-6 mb-3">
+                <label for="firstName" class="text-white font-weight-bold" th:text="#{auth_register_first_name}">First
+                    Name</label>
+                <input
+                        id="firstName"
+                        th:field="*{firstName}"
+                        th:errorclass="is-invalid"
+                        type="text"
+                        class="form-control"
+                        th:placeholder="#{auth_register_first_name}"/>
+                <p class="invalid-feedback errors alert alert-danger" th:text="#{auth_register_message_first_name}">
+                    First name is required and should be between 2 and 20 symbols.
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-6 mb-3">
+                <label for="lastName" class="text-white font-weight-bold" th:text="#{auth_register_last_name}">Last
+                    Name</label>
+                <input id="lastName"
+                       th:field="*{lastName}"
+                       th:errorclass="is-invalid"
+                       type="text"
+                       class="form-control"
+                       th:placeholder="#{auth_register_last_name}"/>
+                <p class="invalid-feedback errors alert alert-danger" th:text="#{auth_register_message_last_name }">
+                    Last name is required and should be between 2 and 20 symbols.
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-6 mb-3">
+                <label for="telephone" class="text-white font-weight-bold" th:text="#{auth_register_telephone}">Telephone</label>
+                <input
+                        id="telephone"
+                        th:field="*{telephone}"
+                        th:errorclass="is-invalid"
+                        type="text"
+                        class="form-control"
+                        th:placeholder="#{auth_register_telephone}"/>
+                <p class="invalid-feedback errors alert alert-danger" th:text="#{auth_register_message_telephone    }">
+                    Telephone is required and should be at less 8 digits.
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-6 mb-3">
+                <label for="email" class="text-white font-weight-bold" th:text="#{auth_register_email}">Email</label>
+                <input id="email"
+                       th:field="*{email}"
+                       th:errorclass="is-invalid"
+                       type="text"
+                       class="form-control"
+                       th:placeholder="#{auth_register_email}"/>
+                <div class="invalid-feedback errors alert alert-danger">
+                    <div th:each="err : ${#fields.errors('email')}" th:text="#{auth_register_message_email}">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-6 mb-3">
+                <label for="password" class="text-white font-weight-bold"
+                       th:text="#{auth_register_password}">Password</label>
+                <input id="password"
+                       th:field="*{password}"
+                       th:errorclass="is-invalid"
+                       type="password"
+                       class="form-control"
+                       th:placeholder="#{auth_register_password}"/>
+                <p class="invalid-feedback errors alert alert-danger" th:text="#{auth_register_pass}">
+                    Password is required and should be at least 5 symbols.
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-6 mb-3">
+                <label for="confirmPassword" class="text-white font-weight-bold"
+                       th:text="#{auth_register_repeat_password}">Repeat Password</label>
+                <input id="confirmPassword"
+                       th:field="*{confirmPassword}"
+                       th:errorclass="is-invalid"
+                       type="password"
+                       class="form-control"
+                       th:placeholder="#{auth_register_repeat_password}"/>
+                <p class="invalid-feedback errors alert alert-danger" th:text="#{auth_register_pass_confirm}">
+                    Passwords should match.
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-md-4">
+                <div class="button-holder d-flex">
+                    <input type="submit" class="btn btn-info btn-lg" th:value="#{auth_register_register}"/>
+                </div>
+            </div>
+        </div>
+
+    </form>
+</div>
+
+<div>
+    <footer th:replace="fragments/footer::footer"></footer>
+</div>
+
+</body>
+</html>
